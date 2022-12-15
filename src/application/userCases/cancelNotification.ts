@@ -21,8 +21,6 @@ export class CancelNotification {
       notificationId,
     );
 
-    console.log(notification);
-
     if (!notification) {
       throw new NotificationNotFound();
     }

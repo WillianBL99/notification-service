@@ -13,3 +13,15 @@ export class CreateNotificationBody {
   @IsIn(['vendor', 'user'])
   category: string;
 }
+
+export class NotificationId {
+  @IsNotEmpty()
+  @IsUUID()
+  id: string;
+}
+
+export class RecipientId {
+  @IsNotEmpty()
+  @IsUUID()
+  recipientId: string;
+}
