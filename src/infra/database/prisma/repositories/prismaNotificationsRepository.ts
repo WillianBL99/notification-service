@@ -1,36 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Notification } from '../../../../application/entities/notification';
-import { NotificationsRepository } from '../../../../application/repositories/notificationsRepository';
+import { Notification } from '@application/entities/notification';
+import { NotificationsRepository } from '@application/repositories/notificationsRepository';
 import { PrismaService } from '../prisma.service';
+import { PrismaNotificationMapper } from '../mappers/prismaNotificationMapper';
 
 @Injectable()
 export class PrismaNotificationsRepository implements NotificationsRepository {
   constructor(private prismaService: PrismaService) {}
 
   async create(notification: Notification): Promise<void> {
-    console.log(
-      'prisma create',
-      await this.prismaService.notifications.findMany(),
-    );
-    console.log({
-      id: notification.id,
-      category: notification.category,
-      // content: notification.content.value,
-      // recipientId: notification.recipientId,
-      // readAt: notification.readAt,
-      // createdAt: notification.createdAt,
-    });
-
+    const raw = PrismaNotificationMapper.toPrisma(notification);
     await this.prismaService.notifications.create({
-      data: {
-        id: notification.id,
-        category: notification.category,
-        content: notification.content.value,
-        recipientId: notification.recipientId,
-        readAt: notification.readAt,
-        createdAt: notification.createdAt,
-      },
+      data: raw,
     });
-    console.log('prisma created');
   }
 }

@@ -1,4 +1,4 @@
-import { InMemoryNotificationRepository } from '../../../test/inMemoryRepository/inMemoryNotificationRepository';
+import { InMemoryNotificationRepository } from '@test/inMemoryRepository/inMemoryNotificationRepository';
 import { SendNotification } from './sendNotification';
 
 describe('Send notification', () => {
